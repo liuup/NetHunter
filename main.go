@@ -1,14 +1,15 @@
 package main
 
 import (
+	"example/router"
 	"fmt"
 	"log"
 	"time"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
+
 	"github.com/google/gopacket/pcap"
-	// "github.com/google/gopacket/pcap"
 )
 
 var (
@@ -23,7 +24,9 @@ var (
 )
 
 func main() {
-	fmt.Print()
+	r := router.GetRouter()
+
+	r.Run(":9876")
 
 	// find all devices
 	devices, err := pcap.FindAllDevs()
@@ -67,6 +70,7 @@ func main() {
 	}(packetSource)
 
 	select {}
+
 }
 
 func GetPacketInfo(p gopacket.Packet) {
