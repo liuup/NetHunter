@@ -11,8 +11,13 @@ func GetRouter() *gin.Engine {
 
 	api := r.Group("/api")
 	{
+		// 获取所有设备
 		api.GET("/device", netapi.GetAllDevices)
+		// 选择设备
 		api.POST("/device/choose", netapi.ChooseDevice)
+
+		api.GET("/packet", netapi.GetPakcet)
+
 	}
 	return r
 }
