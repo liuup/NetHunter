@@ -40,17 +40,11 @@ func main() {
 	}
 
 	// 打开设备
-	handle, err := pcap.OpenLive(device, snapshot_len, promiscuous, timeout)
+	handle, err := pcap.OpenLive("\\Device\\NPF_{6859611A-A240-4DE0-8FC1-B7645ABB5A84}", snapshot_len, promiscuous, timeout)
 	if err != nil {
 		log.Println(err)
 	}
 	defer handle.Close()
-
-	filter := "udp"
-	err = handle.SetBPFFilter(filter)
-	if err != nil {
-		log.Println(err)
-	}
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 
