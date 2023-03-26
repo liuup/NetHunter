@@ -8,6 +8,8 @@ import (
 	"github.com/google/gopacket/pcap"
 )
 
+var G_device string = ""
+
 // 查询所有网络设备
 func GetAllDevices(c *gin.Context) {
 	// 找到所有网络设备
@@ -32,12 +34,19 @@ func ChooseDevice(c *gin.Context) {
 
 	// 直接设置到context中
 	if device != "" {
-		c.Set("device", device)
+		G_device = device
 	}
 
-	if v, ok := c.Get("device"); ok {
-		log.Println(v)
-	} else {
-		log.Println("device not set!")
+	// if v, ok := c.Get("device"); ok {
+	// 	log.Println(v)
+	// } else {
+	// 	log.Println("device not set!")
+	// }
+	if G_device != "" {
+		log.Println("device set!")
 	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"msg": "device is " + G_device,
+	})
 }
