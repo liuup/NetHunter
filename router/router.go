@@ -17,6 +17,7 @@ func GetRouter() *gin.Engine {
 		api.POST("/device/choose", netapi.ChooseDevice)
 
 		api.GET("/packet", netapi.GetPakcet)
+		api.GET("/packet/trace", netapi.GetPacketTrace)
 
 	}
 	return r
